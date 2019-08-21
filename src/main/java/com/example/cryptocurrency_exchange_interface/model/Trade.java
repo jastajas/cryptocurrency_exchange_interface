@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
+/**
+ * Object represents response for trade subscriptions request.
+ */
 @Builder(toBuilder = true)
 @Data
 @NoArgsConstructor
@@ -16,8 +19,8 @@ public class Trade {
     private String messageType;
     private String seq;
     private int timestamp;
-    private float price;
-    private float amount;
+    private double price;
+    private double amount;
 
 
     public String printBasicData() {

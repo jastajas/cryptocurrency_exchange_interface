@@ -3,30 +3,34 @@ package com.example.cryptocurrency_exchange_interface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
+/**
+ * <h1> Bitfinex Cryptocurrency Exchange Interface </h1>
+ * <p>Simple interface that download data from bitfinex server via its API:
+ * get symbols details and check and update recent trade event for btcusd pair.</p>
+ *
+ * @autor Jacek Stańczak
+ * @version 1.0.0
+ * @since 2019.08.21
+ */
 @SpringBootApplication
 public class CryptocurrencyExchangeInterfaceApplication {
 
     @Autowired
     private ApllicationController apllicationController;
-    @Autowired
-    private ConfigurableApplicationContext applicationContext;
 
     @PostConstruct
     public void runApplication() {
-        apllicationController.runApp(applicationContext);
+         apllicationController.runApp();
     }
 
-    public static void main(String[] args) throws URISyntaxException, IOException, InterruptedException {
+    public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(CryptocurrencyExchangeInterfaceApplication.class, args);
+
 
     }
 
