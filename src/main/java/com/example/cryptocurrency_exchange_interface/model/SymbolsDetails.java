@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Component
 public class SymbolsDetails {
 
     private String pair;
@@ -25,7 +24,7 @@ public class SymbolsDetails {
 
     public String printBasicData(){
         return
-                pair + ",     " + price_precision +",    " + maximum_order_size + ",    " + minimum_order_size;
+                pair.toUpperCase() + ",     " + price_precision +",    " + maximum_order_size + ",    " + minimum_order_size;
     }
 
 }

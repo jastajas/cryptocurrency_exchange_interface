@@ -16,13 +16,15 @@ import java.util.List;
 public class BitfinexObjectsConverter {
 
     private ObjectMapper mapper;
+    private ExceptionLogger exceptionLogger;
 
     /**
      * @param mapper ObjectMapper class for mapping JSON object to Java Beans.
      */
     @Autowired
-    public BitfinexObjectsConverter(ObjectMapper mapper) {
+    public BitfinexObjectsConverter(ObjectMapper mapper, ExceptionLogger exceptionLogger) {
         this.mapper = mapper;
+        this.exceptionLogger = exceptionLogger;
     }
 
     /**
@@ -47,6 +49,7 @@ public class BitfinexObjectsConverter {
                     .amount(objects[5] instanceof Integer ? Double.valueOf((Integer) objects[5]) : (Double) objects[5])
                     .build();
         } catch (MismatchedInputException e) {
+            exceptionLogger.logException(e, "Trade object building exception.");
         }
         return null;
     }
@@ -69,7 +72,7 @@ public class BitfinexObjectsConverter {
 
     /**
      * Method convert Object to SymbolDetails.
-     * @param object objects represent general objects
+     * @param object represent general objects
      * @return SymbolsDetails object
      */
     public SymbolsDetails convertObjectToSymbolDetails(Object object) {
@@ -84,15 +87,16 @@ public class BitfinexObjectsConverter {
 
     /**
      * Method convert JSON (string) to  object SubscriptionResponse.
-     * @param json Method convert JSON (string) to Trade object.
+     * @param responseObject Method convert JSON (string) to Trade object.
      * @return SubscriptionResponse object.
      */
 
-    public SubscriptionResponse convertObjectToSubscriptionResponse(String json) {
+    public SubscriptionResponse convertObjectToSubscriptionResponse(String responseObject) {
 
         try {
-            return  mapper.readValue(json, SubscriptionResponse.class);
+            return  mapper.readValue(responseObject, SubscriptionResponse.class);
         } catch (IOException e) {
+            exceptionLogger.logException(e, "SubscriptionResponse object mapping exception.");
         }
 
         return null;

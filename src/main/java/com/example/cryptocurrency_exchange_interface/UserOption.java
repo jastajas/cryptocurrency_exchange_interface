@@ -7,6 +7,7 @@ public enum UserOption {
     PRINT_SYMBOL_DETAILS("Show all symbols details"),
     RUN_TRADES_MONITORING("Run BTCUSD pair trades monitoring"),
     FINISH_TRADES_MONITORING("Finish BTCUSD pair trades monitoring"),
+    PRINT_TRADES("Show BTCUSD pair trades"),
     FINISH("Finish programm");
 
     private String optionDescription;
